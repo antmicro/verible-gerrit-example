@@ -8,9 +8,9 @@ The script allows to automatically push Verible warnings as comments in Gerrit`s
 2. Install [reviewodog](https://github.com/reviewdog/reviewdog#installation).
 3. Install [Verible](https://github.com/chipsalliance/verible/releases).
 4. Clone repository [verible-linter-action](https://github.com/chipsalliance/verible-linter-action).
-5. Apply diff to verible-linter-action:
-`git apply <path to rdf_gen.diff>
-6. Create reviewdog user:
+5. Apply diff to verible-linter-action:\
+`git apply <path to rdf_gen.diff>`
+6. Create reviewdog user:\
 `ssh -p 29418 admin@localhost gerrit create-account --group "'Service Users'" reviewdog`
 
 ## In each new terminal session
@@ -20,7 +20,7 @@ The script allows to automatically push Verible warnings as comments in Gerrit`s
 It can be done by running `source set_env.sh` command. However, you may want to change some of them.
 
 # Usage
-First push commit and create Change in Gerrit.
+First push commit and create Change in Gerrit.\
 Then just run `verible_script.sh <change-id>` in a directory with project you want to use Verible on.
 `change-id` is a field that is added to the commit description.\
 Verible will be run on the `*.v` and `*.sv` files from this directory. Warnings from the lines that
