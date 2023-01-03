@@ -11,7 +11,8 @@ The script allows to automatically push Verible warnings as comments in Gerrit`s
 5. Apply diff to verible-linter-action:\
 `git apply <path to rdf_gen.diff>`
 6. Create reviewdog user:\
-`ssh -p 29418 admin@localhost gerrit create-account --group "'Service Users'" reviewdog`
+`ssh -p 29418 admin@localhost gerrit create-account --group "'Service Users'" --http-password rev_pass reviewdog`
+This command has to be run from docker container on which Gerrit runs.
 
 ## In each new terminal session
 1. Add paths to `verible-linter-action` and `verible` directories in the `PATH` variable
@@ -22,7 +23,8 @@ It can be done by running `source set_env.sh` command. However, you may want to 
 # Usage
 First push commit and create Change in Gerrit.\
 Then just run `verible_script.sh <change-id>` in a directory with project you want to use Verible on.
-`change-id` is a field that is added to the commit description.\
+`change-id` is a field that is added to the commit description. You can add a
+[hook](https://gerrit-review.googlesource.com/Documentation/user-changeid.html) that adds it automatically.\
 Verible will be run on the `*.v` and `*.sv` files from this directory. Warnings from the lines that
 are untouched in the Change are skipped.
 
