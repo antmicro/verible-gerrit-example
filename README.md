@@ -2,15 +2,27 @@
 
 The script allows to automatically push Verible warnings as comments in Gerrit`s Changes.
 
-The script has to be run in a project directory on which Verible has to be used.
-1st script argument is a path to a directory. Verible will be run on the `*.v` and
-`*.sv` files from this directory.
-`GERRIT_CHANGE_ID` is used to point a Change to which the comments have to be added.
-Warnings from the lines that are untouched in the Change are skipped.
+# Setup
+## At first use only
+1. Clone this repository.
+2. Install [reviewodog](https://github.com/reviewdog/reviewdog#installation).
+3. Install [Verible](https://github.com/chipsalliance/verible/releases).
+4. Clone repository [verible-linter-action](https://github.com/chipsalliance/verible-linter-action).
+5. Apply diff to verible-linter-action:
+`git apply <path to rdf_gen.diff>
+6. Create reviewdog user:
+`ssh -p 29418 admin@localhost gerrit create-account --group "'Service Users'" reviewdog`
 
-It uses scripts from https://github.com/chipsalliance/verible-linter-action and
-reviewdog: https://github.com/reviewdog/reviewdog. \
-rdf_gen.diff has to be applied to verible-linter-action. It can be done by the command:\
-`git apply <path to diff file>` in verible-linter-action directory.\
-It requires to have a path to `verible-linter-action` directory in the `PATH` variable and a
-path to reviewdog executable in `REVIEWDOG_BIN` variable.
+## In each new terminal session
+1. Add paths to `verible-linter-action` and `verible` directories in the `PATH` variable
+2. Add path to reviewdog executable in `REVIEWDOG_BIN` variable.
+3. Set environment variables required by Gerrit.
+It can be done by running `source set_env.sh` command. However, you may want to change some of them.
+
+# Usage
+First push commit and create Change in Gerrit.
+Then just run `verible_script.sh <change-id>` in a directory with project you want to use Verible on.
+`change-id` is a field that is added to the commit description.\
+Verible will be run on the `*.v` and `*.sv` files from this directory. Warnings from the lines that
+are untouched in the Change are skipped.
+
