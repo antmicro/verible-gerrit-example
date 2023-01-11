@@ -1,0 +1,7 @@
+#!/usr/bin/expect
+
+spawn curl -X PUT --user admin -d "{\"generate\": true}" --header "Content-Type: application/json; charset=UTF-8" http://localhost:8080/a/accounts/1000000/password.http
+expect password
+send "secret\r"
+expect -re "\r\n(.*?)\r\n$"
+puts $expect_out(1,string)
