@@ -26,7 +26,7 @@ The hook adds a ChangeId field to commit messages, which is required by Gerrit. 
    2. echo "module t; endmodule" > code.v
    3. git add code.v
    4. git commit -m "Add code"
-   5. git push origin HEAD:refs/for/master\
+   5. git push origin HEAD:refs/for/master
    6. You need the account credentials. The username is `admin`, the password can be generated in account settings.
 Then you can go to project page, click `VIEW CHANGES` (just under a project name) and see the change that was created.
 6. Create reviewdog user:
