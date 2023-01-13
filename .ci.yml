@@ -1,0 +1,13 @@
+image: docker:latest
+
+services:
+  - docker:dind
+
+stages:
+  - build
+
+example_gerrit_run:
+  stage: build
+  script:
+    - docker build -t example-gerrit-run .
+    - docker run example-gerrit-run
