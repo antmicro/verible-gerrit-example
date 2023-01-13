@@ -21,7 +21,7 @@ The hook adds a ChangeId field to commit messages, which is required by Gerrit. 
 
        git clone "http://localhost:8080/my_project" && (cd "my_project" && mkdir -p .git/hooks && curl -Lo `git rev-parse --git-dir`/hooks/commit-msg http://localhost:8080/tools/hooks/commit-msg; chmod +x `git rev-parse --git-dir`/hooks/commit-msg)
 
-4. Create a commit and open a Change:
+4. Create a commit and open a Change (steps 1 - 5 can be done by running `make_change.sh` script):
    1. git checkout -b add-code
    2. echo "module t; endmodule" > code.v
    3. git add code.v
