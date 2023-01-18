@@ -1,11 +1,23 @@
 # Verible integration with Gerrit
 
-The script allows to automatically push Verible warnings as comments in Gerrit`s Changes.\
-The manual below provides steps to setup Gerrit on docker container and automatically post Verible warnings
-as comments in Gerrit's Change.
+This project allows to create a docker container that runs Gerrit and automatically posts Verible warnings from example
+repository as a comments in Gerrit Change.
+
+# Container manual
+
+To create and run the container following commands can be used:
+```
+docker build -t <container-name> .
+docker run <container-name>
+```
+
+It will start the Gerrit server, and when it's ready it will create a project, run Verible linter to create warning
+about code style violations and will send those warning as comments into created Gerrti Change.
+
+The guide below showcase how to manually recreate steps done by the container above
 
 # Create and configure a Gerrit project
-1. Create a container\
+1. Create a container with Gerrit server\
 It can be done by the command:\
 `docker run -ti -p 8080:8080 -p 29418:29418 gerritcodereview/gerrit`\
 You can find more information [here](https://hub.docker.com/r/gerritcodereview/gerrit).
