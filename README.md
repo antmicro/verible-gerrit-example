@@ -1,5 +1,7 @@
 # Verible integration with Gerrit
 
+Copyright (c) 2023 [Antmicro](https://www.antmicro.com>)
+
 This project allows to create a docker container that runs Gerrit and automatically posts Verible warnings from example
 repository as a comments in Gerrit Change.
 
