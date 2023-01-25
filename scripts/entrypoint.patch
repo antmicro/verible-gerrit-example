@@ -1,10 +1,11 @@
---- entrypoint.sh	2023-01-11 15:28:18.451605850 +0100
-+++ entrypoint.sh	2023-01-13 16:20:49.297523604 +0100
-@@ -21,5 +21,8 @@
+--- entrypoint.sh	2023-01-25 14:39:02.436146791 +0100
++++ entrypoint.sh	2023-01-25 14:45:58.292813870 +0100
+@@ -21,5 +21,9 @@
  if [ "$1" != "init" ]
  then
    echo "Running Gerrit ..."
 -  exec /var/gerrit/bin/gerrit.sh run
++  touch /server.log
 +  /var/gerrit/bin/gerrit.sh run > server.log 2>&1 &
 +  tail -f /server.log | sed '/Gerrit Code Review [0-9\.]* ready/ q'
 +  echo "Gerrit server started"
