@@ -3,35 +3,35 @@
 Copyright (c) 2023 [Antmicro](https://www.antmicro.com>)
 
 This project allows to create a docker container that runs Gerrit and automatically posts Verible warnings from example
-repository as a comments in Gerrit Change.
+repository as comments in Gerrit Change.
 
 # Container manual
 
-To create and run the container following commands can be used:
+To create and run the container, the following commands can be used:
 ```
 docker build -t <container-name> .
 docker run <container-name>
 ```
 
-It will start the Gerrit server, and when it's ready it will create a project, run Verible linter to create warning
-about code style violations and will send those warning as comments into created Gerrit Change.
+It will start the Gerrit server, and when it's ready it will create a project. Then it will run the Verible linter to create warnings
+about code style violations and will send those warning as comments into the Gerrit Change created earlier.
 
-The guide below showcase how to manually recreate steps done by the container above
+The guide below shows how to manually recreate the steps done by the container above
 
 # Create and configure a Gerrit project
 1. Create a container with Gerrit server\
-It can be done by the command:\
+It can be done with the following command:\
 `docker run -ti -p 8080:8080 -p 29418:29418 gerritcodereview/gerrit`\
-You can find more information [here](https://hub.docker.com/r/gerritcodereview/gerrit).
+You can find more information about this process [here](https://hub.docker.com/r/gerritcodereview/gerrit).
 2. Create a repository.\
-Go to page http://localhost:8080. Skip the intro and create repository by clicking:\
+Open http://localhost:8080 in your webbrowser. Skip the intro and create a new repository by clicking:\
 BROWSE (on the menu on top of the page) -> Repositories -> CREATE NEW (in the top right corner)
 
        Note: On the project page there are some commands provided. They had URLs that seems to be random. When using them,
        you should replace random part with `localhost:8080`.
 
-3. Clone a repository and add a hook\
-The hook adds a ChangeId field to commit messages, which is required by Gerrit. It can be done by the command:
+3. Clone the repository and add a hook\
+The hook adds a ChangeId field to commit messages, which is required by Gerrit. It can be done with the following command:
 
        git clone "http://localhost:8080/my_project" && (cd "my_project" && mkdir -p .git/hooks && curl -Lo `git rev-parse --git-dir`/hooks/commit-msg http://localhost:8080/tools/hooks/commit-msg; chmod +x `git rev-parse --git-dir`/hooks/commit-msg)
 
@@ -54,7 +54,7 @@ Then you can go to project page, click `VIEW CHANGES` (just under a project name
    `ssh -p 29418 admin@localhost gerrit create-account --group "'Service Users'" --http-password rev_pass reviewdog`
 
 # Prepare tools
-It may be done on your native system, not the docker container
+It can be done on your native system, this part does not need to be dockerized.
 ## At first use only
 1. Clone this repository.
 2. Install [reviewodog](https://github.com/reviewdog/reviewdog#installation).
@@ -67,10 +67,10 @@ It may be done on your native system, not the docker container
 1. Add paths to `verible-linter-action` and `verible` directories in the `PATH` variable
 2. Add path to reviewdog executable in `REVIEWDOG_BIN` variable.
 3. Set environment variables required by Gerrit.
-It can be done by running `source set_env.sh` command. However, you may want to change some of them.
+It can be done by running the `source set_env.sh` script. Please check the script to see if any adjustments are needed on your machine.
 
 # Usage
-The following steps assume that you have already created Change in Gerrit.\
+The following steps assume that you have already created a Change in Gerrit.\
 1. Go to the project directory
 1. Checkout a commit that is related to the Change.
 2. Run `verible_script.sh <change-id>`
