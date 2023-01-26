@@ -14,7 +14,7 @@ docker run <container-name>
 ```
 
 It will start the Gerrit server, and when it's ready it will create a project, run Verible linter to create warning
-about code style violations and will send those warning as comments into created Gerrti Change.
+about code style violations and will send those warning as comments into created Gerrit Change.
 
 The guide below showcase how to manually recreate steps done by the container above
 
