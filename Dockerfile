@@ -1,4 +1,4 @@
-FROM gerritcodereview/gerrit
+FROM gerritcodereview/gerrit:3.7.0
 
 COPY scripts /scripts/
 
